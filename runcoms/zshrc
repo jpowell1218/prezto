@@ -12,6 +12,5 @@ fi
 
 # Customize to your needs...
 
-alias gs="git status"
-alias gc="git commit -v"
-
+alias ll="ls -FlaGh"
+alias s="subl"

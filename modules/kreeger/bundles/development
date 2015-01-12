@@ -1,0 +1,12 @@
+function code () {
+    cd ~/Code/$1
+}
+function capu() {
+    cd ~/Code/captainu/$1
+}
+function kreeger () {
+    cd ~/Code/kreeger/$1
+}
+function make-targz () {
+    tar cvf - $1 | gzip > $1.tar.gz
+}
