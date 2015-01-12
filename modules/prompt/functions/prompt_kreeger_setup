@@ -44,11 +44,12 @@ function prompt_kreeger_end_segment {
 
 function prompt_kreeger_build_prompt {
   prompt_kreeger_start_segment white black '%n@%m%f'
-  prompt_kreeger_start_segment cyan black '$_prompt_kreeger_pwd'
 
   if [[ -n "$ruby_info" ]]; then
     prompt_kreeger_start_segment red black '${(e)ruby_info[version]}'
   fi
+  
+  prompt_kreeger_start_segment cyan black '$_prompt_kreeger_pwd'
 
   if [[ -n "$git_info" ]]; then
     prompt_kreeger_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
@@ -64,7 +65,8 @@ function prompt_kreeger_pwd {
     _prompt_kreeger_pwd="$MATCH"
     unset MATCH
   else
-    _prompt_kreeger_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+    _prompt_kreeger_pwd="${PWD}"
+    # _prompt_kreeger_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
   fi
 }
 
