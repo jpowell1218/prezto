@@ -12,6 +12,7 @@ fi
 
 path=(
   $home/bin
+  $home/Code/captainu/_gems/subs/bin
   /usr/local/{bin,sbin}
   $path
 )

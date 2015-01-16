@@ -10,5 +10,7 @@ source "${ZDOTDIR:-$HOME}/.zprezto/modules/kreeger/bundles/captainu"
 source "${ZDOTDIR:-$HOME}/.zprezto/modules/kreeger/bundles/development"
 source "${ZDOTDIR:-$HOME}/.zprezto/modules/kreeger/bundles/git"
 
+# Load aliases.
+source "${ZDOTDIR:-$HOME}/.zprezto/modules/kreeger/aliases/captainu"
 source "${ZDOTDIR:-$HOME}/.zprezto/modules/kreeger/aliases/git"
 source "${ZDOTDIR:-$HOME}/.zprezto/modules/kreeger/aliases/ruby"
