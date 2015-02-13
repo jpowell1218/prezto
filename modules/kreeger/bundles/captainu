@@ -1,13 +1,14 @@
 function integrate-this() {
     BRANCH=$(git rev-parse --abbrev-ref HEAD)
-    PROJECT=${PWD##*/}
-    CURRENT_DIR=$PWD
-    cd ~/Code/captainu/_integration/$PROJECT
-    git pull origin master
-    git pull $CURRENT_DIR $BRANCH
-    git push origin master
-    cd $CURRENT_DIR
+    git checkout staging && git pull upstream staging
+    git merge $BRANCH
+    git push upstream staging
+    git checkout $BRANCH
     BRANCH=''
-    CURRENT_DIR=''
-    cap staging deploy
+}
+
+function prepare-for-pr() {
+    BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    git push upstream kreeger/$1-$BRANCH-$2
+    BRANCH=''
 }

@@ -1,12 +1,15 @@
+function git-branch-name() {
+    git rev-parse --abbrev-ref HEAD
+}
 function git-nb () {
     git checkout -b $1 && git push -u origin $1
 }
 function gpu () {
-    BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    BRANCH=$(git-branch-name)
     git push upstream $BRANCH
 }
 function gfu () {
-    BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    BRANCH=$(git-branch-name)
     git fetch upstream $BRANCH && git merge upstream/$BRANCH
 }
 function gtg () {
@@ -17,4 +20,18 @@ function git-prune-local () {
 }
 function git-after-pr () {
     gco master && gfu && gp && git remote prune origin && git-prune-local
+    git remote prune upstream && git-prune-local
+}
+function git-dfm () {
+    BRANCH=$(git-branch-name)
+    git diff $BRANCH..master
+}
+function git-diff-from () {
+    BRANCH=$(git-branch-name)
+    git diff $BRANCH..$1
+}
+function git-move-upstream() {
+    BRANCH=$(git-branch-name)
+    git push -u upstream $BRANCH
+    git push origin :$BRANCH
 }
