@@ -15,12 +15,14 @@ function gfu () {
 function gtg () {
     git tag -s $1 && gp && gp --tags
 }
-function git-prune-local () {
-    git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
+function git-prune-branches () {
+    REMOTE=$1
+    git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep $REMOTE) | awk '{print $1}' | xargs git branch -d
 }
 function git-after-pr () {
-    gco master && gfu && gp && git remote prune origin && git-prune-local
-    git remote prune upstream && git-prune-local
+    git checkout master && git fetch upstream master && git push origin master
+    git remote prune origin && git-prune-branches origin
+    git remote prune upstream && git-prune-branches upstream
 }
 function git-dfm () {
     BRANCH=$(git-branch-name)
