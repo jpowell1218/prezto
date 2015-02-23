@@ -1,12 +1,17 @@
+function gpcb() {
+    git push $(git-current-remote) $(git-branch-name)
+}
 function git-branch-name() {
     git rev-parse --abbrev-ref HEAD
+}
+function git-current-remote() {
+    git config branch.$(git-branch-name).remote
 }
 function git-nb () {
     git checkout -b $1 && git push -u origin $1
 }
 function gpu () {
-    BRANCH=$(git-branch-name)
-    git push upstream $BRANCH
+    git push upstream $(git-branch-name)
 }
 function gfu () {
     BRANCH=$(git-branch-name)
@@ -25,12 +30,10 @@ function git-after-pr () {
     git remote prune upstream && git-prune-branches upstream
 }
 function git-dfm () {
-    BRANCH=$(git-branch-name)
-    git diff $BRANCH..master
+    git diff $(git-branch-name)..master
 }
 function git-diff-from () {
-    BRANCH=$(git-branch-name)
-    git diff $BRANCH..$1
+    git diff $(git-branch-name)..$1
 }
 function git-move-upstream() {
     BRANCH=$(git-branch-name)
